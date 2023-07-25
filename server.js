@@ -14,17 +14,14 @@ connectDb();
 //rest object
 const app =express()
 
-//middlewares 
+//middleware 
 app.use(morgan('dev'))
 app.use (express.json())
 app.use(cors())
 
 
-//routrs
-app.get('/', (req,res)=>{
-    res.send ("<h1>hello from server</h1>")
-
-})
+//routes
+app.use('/api/v1/users',require('./routes/userRoute'))
 
 //port
 const PORT =8080 || process.env.PORT
