@@ -1,7 +1,11 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Form, Input, message } from "antd";
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
+import axios from 'axios'
+import Spinner from "../components/Spinner";
 const Register = () => {
+  const navigate =useNavigate();
+  const [loading, setLoading] = useState(false);
     //from submit
   const submitHandler = async (values) => {
     try {
@@ -15,6 +19,14 @@ const Register = () => {
       message.error("something went wrong");
     }
   };
+
+   //prevent for login user
+   useEffect(() => {
+    if (localStorage.getItem("user")) {
+      navigate("/");
+    }
+  }, [navigate]);
+
   return (
     <>
     <div className="register-page ">
